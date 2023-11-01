@@ -71,5 +71,5 @@ srvApp.use((err, req, res, next) => {
 
 srvApp.listen(PORT, () => {
     // サーバー起動後に呼ばれる
-    console.log("Start express server");
+    console.log("[Start] express_server");
 });
