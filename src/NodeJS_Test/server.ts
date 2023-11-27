@@ -32,14 +32,14 @@ redis.connect()
       process.exit(1);
     }
   })
-  .on('error', (err) => {
+  .on('error', (err: Error) => {
     console.error(err);
     process.exit(1);
   });
 
   
 
-  app.get('/user/:id', async (req, res) => {
+  app.get('/user/:id', async (req: Express.Request, res: Express.Response) => {
     try {
       const user: string = await usersHandler.getUser(req);
       res.status(200).json(user);
@@ -51,7 +51,7 @@ redis.connect()
 
   
 
-  app.get('/users', async (req, res) => {
+  app.get('/users', async (req: Express.Request, res: Express.Response) => {
     try {
       const locals: {} = await usersHandler.getUsers(req);
       // HTML作成 (SSR)
@@ -60,11 +60,6 @@ redis.connect()
       console.error(err);
     }
   });
-
-  
-
-
-
 
 
 // view engine setup
@@ -79,11 +74,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(createHttpError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err: Error, req: Express.Request, res: Express.Response, next: any) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
