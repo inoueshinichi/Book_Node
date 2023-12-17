@@ -1,6 +1,14 @@
+// CommonJS Module
 // ioredisでRedisインスタンスをnewで生成するときの引数
 
-const redisConfig = {
+type RedisConfig = {
+    port: number;
+    host: string;
+    password?: string;
+    enableOfflineQueue: boolean;
+};
+
+const redisConfig: RedisConfig = {
     port: 6379,
     host: 'localhost',
     password: process.env.REDIS_PASSWORD,
@@ -8,3 +16,6 @@ const redisConfig = {
 };
 
 exports.redisConfig = redisConfig;
+
+// モジュール宣言
+export { };

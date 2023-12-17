@@ -1,12 +1,16 @@
+// CommonJS Module
 const { redisConfig } = require("../ioredis_config");
 const Redis = require('ioredis');
 
-let redis = null;
+let redis: any = null;
 exports.redis = redis;
 
-const getClient = () => {
+// Mock化対象
+function getClient() {
     return redis;
-};
+}
+
+exports.getClient = getClient;
 
 const connect = () => {
     if (!redis) {
@@ -28,3 +32,6 @@ const init = async () => {
 };
 
 exports.init = init;
+
+// モジュール宣言
+export { };
